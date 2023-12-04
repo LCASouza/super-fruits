@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bujrff8uhy4yf"]
+
+[ext_resource type="Texture2D" uid="uid://brt8ui8wrbrny" path="res://Resources/Items/Heart.png" id="1_m0xhh"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Heart" type="Sprite2D" parent="UI"]
+position = Vector2(32, 32)
+texture = ExtResource("1_m0xhh")
