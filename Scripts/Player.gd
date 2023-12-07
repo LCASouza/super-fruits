@@ -9,26 +9,32 @@ enum State {
 }
 
 @export var max_jumps: int = 1
+@export var scene : int = 0
 
 @onready var visuals = $Visuals
 @onready var velocity_component = $VelocityComponent
 @onready var animation_player = $AnimationPlayer
+@onready var particle_run_spawn = $ParticleRun
+@export var particle_run_effect : PackedScene
 
 var jump_count: int = 0
 var current_state: State = State.IDLE
+var dont_move: bool = false
 
 func _process(_delta):
-	var movement_x_vector = get_input_velocity()
-	verify_vertical_input()
-	velocity_component.accelerate_in_direction_with_gravity(movement_x_vector)
-	velocity_component.move(self)
-	handle_state(movement_x_vector)
+	if !dont_move:
+		var movement_x_vector = get_input_velocity()
+		verify_vertical_input()
+		velocity_component.accelerate_in_direction_with_gravity(movement_x_vector)
+		velocity_component.move(self)
+		handle_state(movement_x_vector)
 
 func handle_state(movement_x_vector: float):
 	match current_state:
 		State.IDLE:
 			handle_idle(movement_x_vector)
 		State.RUN:
+			particle_run_instantiate()
 			handle_run(movement_x_vector)
 		State.JUMP:
 			handle_jump()
@@ -62,6 +68,7 @@ func handle_fall():
 		current_state = State.IDLE
 
 func handle_hit():
+	dont_move = true
 	current_state = State.HIT
 
 func update_visuals(movement_x_vector: float):
@@ -114,3 +121,19 @@ func die():
 	await get_tree().create_timer(0.6).timeout
 	queue_free()
 	get_tree().reload_current_scene()
+
+func portal_entered():
+	current_state = State.HIT
+	await get_tree().create_timer(0.6).timeout
+	queue_free()
+	if scene == 0:
+		get_tree().change_scene_to_file("res://Scenes/SecondLevel.tscn")
+	else:
+		get_tree().change_scene_to_file("res://Scenes/Fim.tscn")
+
+func particle_run_instantiate():
+	var particle = particle_run_effect.instantiate()
+	particle.position = particle_run_spawn.global_position
+	particle.rotation = particle_run_spawn.global_rotation
+	particle.emitting = true
+	get_tree().current_scene.add_child(particle)

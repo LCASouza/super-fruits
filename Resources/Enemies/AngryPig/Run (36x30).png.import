@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brt8ui8wrbrny"
-path="res://.godot/imported/Heart.png-fde0301f94b1fbbc63f3f3a0c2f36efc.ctex"
+uid="uid://dyh1qfw3221yc"
+path="res://.godot/imported/Run (36x30).png-e286d0df320c2bb9baeed65e3467df85.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Items/Heart.png"
-dest_files=["res://.godot/imported/Heart.png-fde0301f94b1fbbc63f3f3a0c2f36efc.ctex"]
+source_file="res://Resources/Enemies/AngryPig/Run (36x30).png"
+dest_files=["res://.godot/imported/Run (36x30).png-e286d0df320c2bb9baeed65e3467df85.ctex"]
 
 [params]
 

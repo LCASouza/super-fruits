@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy58y3yaisybd"]
+
+[ext_resource type="Texture2D" uid="uid://cdqlg33qff0u7" path="res://Resources/Items/Boxes/Box1/Idle.png" id="1_dm0nx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gbdo"]
+
+[node name="Box" type="RigidBody2D"]
+collision_layer = 32
+collision_mask = 3
+gravity_scale = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5gbdo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dm0nx")

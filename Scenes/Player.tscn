@@ -2,50 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://cc3j572rb25wo" path="res://Resources/Main Characters/Pink Man/Idle (32x32).png" id="1_61avv"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_87avp"]
+[ext_resource type="PackedScene" uid="uid://boanh3eaxvf7t" path="res://Scenes/RunEffect.tscn" id="2_auwfn"]
 [ext_resource type="Texture2D" uid="uid://bwvv6pgtxgh34" path="res://Resources/Main Characters/Pink Man/Hit (32x32).png" id="2_mf485"]
 [ext_resource type="PackedScene" uid="uid://dovij1kql3dq6" path="res://Component/Velocity/velocity_component.tscn" id="3_7pyx1"]
 [ext_resource type="Texture2D" uid="uid://cemui38w2mvis" path="res://Resources/Main Characters/Pink Man/Fall (32x32).png" id="3_ic83b"]
 [ext_resource type="Texture2D" uid="uid://ntfqs7hcisrn" path="res://Resources/Main Characters/Pink Man/Jump (32x32).png" id="4_lm0r4"]
 [ext_resource type="Texture2D" uid="uid://bcmu5rt233134" path="res://Resources/Main Characters/Pink Man/Run (32x32).png" id="5_dsx56"]
-
-[sub_resource type="Animation" id="Animation_3munt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Sprite2D:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_mf485")]
-}
 
 [sub_resource type="Animation" id="Animation_hvs0a"]
 resource_name = "fall"
@@ -250,7 +212,6 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_50u02"]
 _data = {
-"RESET": SubResource("Animation_3munt"),
 "fall": SubResource("Animation_hvs0a"),
 "hit": SubResource("Animation_72enh"),
 "idle": SubResource("Animation_6dc3l"),
@@ -259,12 +220,16 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2er3o"]
+height = 26.0
 
 [node name="Player" type="CharacterBody2D"]
+light_mask = 8
+visibility_layer = 8
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_87avp")
 max_jumps = 2
+particle_run_effect = ExtResource("2_auwfn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
@@ -285,5 +250,9 @@ jump_time_to_descent = 0.35
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
-texture = ExtResource("2_mf485")
-hframes = 7
+position = Vector2(0, -3)
+texture = ExtResource("1_61avv")
+hframes = 11
+
+[node name="ParticleRun" type="Node2D" parent="."]
+position = Vector2(0, 12)

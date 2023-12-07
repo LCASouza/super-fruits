@@ -1,0 +1,173 @@
+[gd_scene load_steps=15 format=3 uid="uid://bw5ifluj438of"]
+
+[ext_resource type="FontFile" uid="uid://djnkqbxd5xg34" path="res://Resources/RifficFree-Bold.ttf" id="1_d5vqe"]
+[ext_resource type="Script" path="res://Scripts/Menu.gd" id="2_85daj"]
+[ext_resource type="AudioStream" uid="uid://dl3woplfodjnp" path="res://Music/MusicMenu.mp3" id="3_oluuw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehrf4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dhsn"]
+content_margin_left = 10.0
+content_margin_top = 2.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.996078, 0.501961, 0.305882, 1)
+border_width_bottom = 12
+border_color = Color(0.996078, 0.4, 0.121569, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3le6i"]
+content_margin_left = 10.0
+content_margin_top = 2.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.996078, 0.423529, 0.168627, 1)
+border_width_bottom = 12
+border_color = Color(0.909804, 0.341176, 0.0196078, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ioxal"]
+bg_color = Color(0.909804, 0.341176, 0.0196078, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Theme" id="Theme_y5yyr"]
+default_font_size = 46
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(1, 1, 1, 0)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/fonts/font = ExtResource("1_d5vqe")
+Button/styles/focus = SubResource("StyleBoxFlat_ehrf4")
+Button/styles/hover = SubResource("StyleBoxFlat_7dhsn")
+Button/styles/normal = SubResource("StyleBoxFlat_3le6i")
+Button/styles/pressed = SubResource("StyleBoxFlat_ioxal")
+
+[sub_resource type="Gradient" id="Gradient_d8kpa"]
+colors = PackedColorArray(0.999995, 0.427327, 0.34355, 1, 1, 0.796078, 0.760784, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o5t1m"]
+gradient = SubResource("Gradient_d8kpa")
+fill = 1
+fill_from = Vector2(0.38, 1.27)
+fill_to = Vector2(1.09, 0.26)
+
+[sub_resource type="Gradient" id="Gradient_a0fft"]
+colors = PackedColorArray(1, 0.321569, 0.27451, 1, 1, 1, 0.141176, 0.403922)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c01iw"]
+gradient = SubResource("Gradient_a0fft")
+width = 2048
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p45qs"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(900, 1, 1)
+particle_flag_disable_z = true
+direction = Vector3(1, 90, 2.08165e-12)
+gravity = Vector3(2.08165e-12, -90, 2.08165e-12)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 10.0
+scale_max = 20.0
+color_ramp = SubResource("GradientTexture1D_c01iw")
+turbulence_noise_speed = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+turbulence_noise_speed_random = 4.0
+turbulence_influence_min = 0.06
+turbulence_influence_max = 0.06
+
+[sub_resource type="LabelSettings" id="LabelSettings_jq1np"]
+font = ExtResource("1_d5vqe")
+font_size = 120
+font_color = Color(1, 0.345098, 0.215686, 1)
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(1, 6.22)
+
+[node name="Fim" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y5yyr")
+script = ExtResource("2_85daj")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 1079.0
+texture = SubResource("GradientTexture2D_o5t1m")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(958, 1078)
+amount = 90
+process_material = SubResource("ParticleProcessMaterial_p45qs")
+lifetime = 10.0
+
+[node name="Jogar" type="Button" parent="."]
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.5
+offset_top = -71.0
+offset_right = 222.5
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "JOGAR"
+
+[node name="Sair" type="Button" parent="."]
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.5
+offset_top = 15.0
+offset_right = 222.5
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SAIR"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -229.5
+offset_top = 120.0
+offset_right = 229.5
+offset_bottom = 211.0
+grow_horizontal = 2
+text = "Fim"
+label_settings = SubResource("LabelSettings_jq1np")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_oluuw")
+volume_db = -5.0
+autoplay = true
+
+[connection signal="pressed" from="Jogar" to="." method="_on_jogar_pressed" flags=18]
+[connection signal="pressed" from="Sair" to="." method="_on_sair_pressed" flags=18]

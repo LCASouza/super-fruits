@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://ph8x10gaireo"]
+
+[ext_resource type="Texture2D" uid="uid://iw1miqqb187d" path="res://Resources/Traps/Fire/On (16x32).png" id="1_gb8sx"]
+[ext_resource type="Script" path="res://Scripts/FlameTrap.gd" id="1_rbvun"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0nlvn"]
+size = Vector2(16, 14)
+
+[sub_resource type="Animation" id="Animation_7ls3u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_mu7mu"]
+resource_name = "idle"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ukf3r"]
+_data = {
+"RESET": SubResource("Animation_7ls3u"),
+"idle": SubResource("Animation_mu7mu")
+}
+
+[node name="FlameTrap" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_rbvun")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_0nlvn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gb8sx")
+hframes = 3
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_ukf3r")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
